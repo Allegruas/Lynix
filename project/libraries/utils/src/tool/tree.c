@@ -106,18 +106,18 @@ char* TreeToString(Tree* root) {
     if (!buf) return NULL;
     appendStringBuf(buf, root->value);
     appendStringBufChar(buf, '\n');
-    char* empty_prefix = strdup("");
-    if (!empty_prefix) {
+    char* empty = strdup("");
+    if (!empty) {
         freeStringBuf(buf);
         return NULL;
     }
     Tree* child = root->child;
     while (child) {
         Tree* next = child->next;
-        STRecursive(child, buf, empty_prefix, next == NULL);
+        STRecursive(child, buf, empty, next == NULL);
         child = next;
     }
-    free(empty_prefix);
+    free(empty);
     char* result = strdup(buf->buffer);
     freeStringBuf(buf);
     return result;
