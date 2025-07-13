@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.8)
 
 project(UTILS)
 
-add_library(UTILS SHARED "src/type/wstring.c"  "src/tool/stringbuf.c" "src/exception.c" "src/tool/file.c" "src/type/string.c")
+add_library(UTILS SHARED "src/type/wstring.c"  "src/tool/stringbuf.c" "src/exception.c" "src/tool/file.c" "src/type/string.c" "src/tool/tree.c")
 
 
 set_target_properties(UTILS PROPERTIES
