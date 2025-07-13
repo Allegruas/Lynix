@@ -16,6 +16,7 @@ typedef struct stringbuf {
  * @return StringBuf* 新创建的缓冲区指针
  */
 LYNIX_API stringbuf* stringbuffer();
+
 /**
  * @brief 追加字符串到缓冲区
  * @param sb 字符串缓冲区
@@ -23,7 +24,11 @@ LYNIX_API stringbuf* stringbuffer();
  */
 LYNIX_API void appendStringBuf(stringbuf*,char*);
 
-
+/**
+ * @brief 追加字符到缓冲区
+ * @param sb 字符串缓冲区
+ * @param str 要追加的字符
+ */
 LYNIX_API void appendStringBufChar(stringbuf*, char);
 
 /**
