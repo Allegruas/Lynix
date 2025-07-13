@@ -85,19 +85,19 @@ static void STRecursive(Tree* node, stringbuf* buf, const char* prefix, int isLa
     appendStringBuf(buf, isLast ? "©¸©¤©¤ " : "©À©¤©¤ ");
     appendStringBuf(buf, node->value);
     appendStringBufChar(buf, '\n');
-    size_t prefix_len = strlen(prefix);
-    char* new_prefix = (char*)malloc(prefix_len + 5);
-    if (!new_prefix) return;
-    strcpy(new_prefix, prefix);
-    strcat(new_prefix, isLast ? "    " : "©¦   ");
+    size_t len = strlen(prefix);
+    char* pre = (char*)malloc(len + 5);
+    if (!pre) return;
+    strcpy(pre, prefix);
+    strcat(pre, isLast ? "    " : "©¦   ");
     Tree* child = node->child;
     while (child) {
         Tree* next = child->next;
-        STRecursive(child, buf, new_prefix, next == NULL);
+        STRecursive(child, buf, pre, next == NULL);
         child = next;
     }
 
-    free(new_prefix);
+    free(pre);
 }
 
 char* TreeToString(Tree* root) {
