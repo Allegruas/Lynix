@@ -25,27 +25,27 @@ typedef struct Exception
  * @param msg 错误信息
  * @param line 行号
  * @param column 列号
- * @return Exception* h
+ * @return Exception*
  */
 LYNIX_API Exception* createException(char*, char*, int, int);
 
 /**
- * @brief Add Exception`s child
- * @param parent
- * @param child
+ * @brief 添加子项目
+ * @param parent 父
+ * @param child 子
  * @return int
  */
 LYNIX_API int appendExceptionChild(Exception*, Exception*);
 
 /**
- * @brief render Exception
- * @param target
+ * @brief 显示Exception
+ * @param target 目标Exception
  * @return int
  */
 LYNIX_API void renderException(Exception*);
 
 /**
- * @brief free Exception
+ * @brief 释放Exception
  * @param pre
  */
 LYNIX_API void freeException(Exception*);
