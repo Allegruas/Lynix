@@ -9,6 +9,13 @@
 
 
 
+typedef struct jsonbuf {
+    char* buffer;
+    size_t length;
+    size_t capacity;
+} jsonbuf;
+
+
 
 #if defined(_WIN32) && defined(_MSC_VER)
     #define strdup _strdup 
@@ -278,16 +285,6 @@ void freeLyson(Lyson* node) {
     free(node);
 }
 
-typedef struct jsonbuf {
-    char* buffer; 
-    size_t length;   
-    size_t capacity; 
-} jsonbuf;
-
-/**
- * @brief 创建新的字符串缓冲区
- * @return stringbuf* 新创建的缓冲区指针
- */
 static jsonbuf* newbuf() {
     jsonbuf* sb = (jsonbuf*)malloc(sizeof(jsonbuf));
     if (!sb) return NULL;
@@ -303,11 +300,6 @@ static jsonbuf* newbuf() {
     return sb;
 }
 
-/**
- * @brief 追加字符串到缓冲区
- * @param buf 字符串缓冲区
- * @param str 要追加的字符串
- */
 static void appendStr(jsonbuf* buf, const char* str) {
     if (!buf || !str) return;
     size_t len = strlen(str);
@@ -328,11 +320,7 @@ static void appendStr(jsonbuf* buf, const char* str) {
     buf->length = new_len;
 }
 
-/**
- * @brief 追加单个字符到缓冲区
- * @param buf 字符串缓冲区
- * @param c 要追加的字符
- */
+
 static void appendChar(jsonbuf* buf, char c) {
     if (!buf) return;
     if (buf->length + 2 > buf->capacity) {
@@ -348,22 +336,13 @@ static void appendChar(jsonbuf* buf, char c) {
     buf->length++;
 }
 
-/**
- * @brief 追加缩进到缓冲区
- * @param buf 字符串缓冲区
- * @param level 缩进级别
- */
+
 static void appendIndent(jsonbuf* buf, int level) {
     for (int i = 0; i < level; i++) {
         appendStr(buf, "    ");
     }
 }
 
-/**
- * @brief 释放字符串缓冲区并返回字符串
- * @param buf 要释放的缓冲区
- * @return char* 字符串内容（需要调用者释放）
- */
 static char* cstr(jsonbuf* buf) {
     if (!buf) return NULL;
 
@@ -374,11 +353,6 @@ static char* cstr(jsonbuf* buf) {
 }
 
 
-/**
- * @brief 将字符串转义为JSON格式
- * @param str 原始字符串
- * @return char* 转义后的字符串（需要调用者释放）
- */
 static char* jsonString(const char* str) {
     if (!str) return NULL;
     size_t len = strlen(str);
