@@ -80,11 +80,11 @@ Tree* insertNext(Tree* node, char* name, int index) {
     return tree;
 }
 
-static void STRecursive(Tree* node, stringbuf* sb, const char* prefix, int isLast) {
-    appendStringBuf(sb, prefix);
-    appendStringBuf(sb, isLast ? "©¸©¤©¤ " : "©À©¤©¤ ");
-    appendStringBuf(sb, node->value);
-    appendStringBufChar(sb, '\n');
+static void STRecursive(Tree* node, stringbuf* buf, const char* prefix, int isLast) {
+    appendStringBuf(buf, prefix);
+    appendStringBuf(buf, isLast ? "©¸©¤©¤ " : "©À©¤©¤ ");
+    appendStringBuf(buf, node->value);
+    appendStringBufChar(buf, '\n');
     size_t prefix_len = strlen(prefix);
     char* new_prefix = (char*)malloc(prefix_len + 5);
     if (!new_prefix) return;
@@ -93,7 +93,7 @@ static void STRecursive(Tree* node, stringbuf* sb, const char* prefix, int isLas
     Tree* child = node->child;
     while (child) {
         Tree* next = child->next;
-        STRecursive(child, sb, new_prefix, next == NULL);
+        STRecursive(child, buf, new_prefix, next == NULL);
         child = next;
     }
 
@@ -102,24 +102,24 @@ static void STRecursive(Tree* node, stringbuf* sb, const char* prefix, int isLas
 
 char* TreeToString(Tree* root) {
     if (!root) return NULL;
-    stringbuf* sb = stringbuffer();
-    if (!sb) return NULL;
-    appendStringBuf(sb, root->value);
-    appendStringBufChar(sb, '\n');
+    stringbuf* buf = stringbuffer();
+    if (!buf) return NULL;
+    appendStringBuf(buf, root->value);
+    appendStringBufChar(buf, '\n');
     char* empty_prefix = strdup("");
     if (!empty_prefix) {
-        freeStringBuf(sb);
+        freeStringBuf(buf);
         return NULL;
     }
     Tree* child = root->child;
     while (child) {
         Tree* next = child->next;
-        STRecursive(child, sb, empty_prefix, next == NULL);
+        STRecursive(child, buf, empty_prefix, next == NULL);
         child = next;
     }
     free(empty_prefix);
-    char* result = strdup(sb->buffer);
-    freeStringBuf(sb);
+    char* result = strdup(buf->buffer);
+    freeStringBuf(buf);
     return result;
 }
 
