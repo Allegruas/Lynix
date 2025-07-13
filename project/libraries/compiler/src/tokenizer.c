@@ -392,3 +392,24 @@ void renderTokens(Scanner* this) {
 	appendLysonArray(lyson, "tokens", array);
 	printf("%s", lysonToString(lyson, 1));
 }
+
+void freeScanner(Scanner* this) {
+	notNull(this);
+	if (this->source) free(this->source);
+	if (this->path) free(this->path);
+	if (this->tokens) {
+		for (size_t i = 0; i < this->tokens->count; i++) {
+			free(this->tokens->data[i].value);
+		}
+		free(this->tokens->data);
+		free(this->tokens);
+	}
+	if (this->error) {
+		for (size_t i = 0; i < this->error->count; i++) {
+			free(this->error->errors[i]);
+		}
+		free(this->error->errors);
+		free(this->error);
+	}
+	free(this);
+}

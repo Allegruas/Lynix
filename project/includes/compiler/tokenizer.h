@@ -54,4 +54,6 @@ LYNIX_API Token getToken(Scanner*);
 LYNIX_API int scanTokens(Scanner*);
 
 LYNIX_API void renderTokens(Scanner*);
+
+LYNIX_API void freeScanner(Scanner*);
 #endif // !TOKENIZER_H

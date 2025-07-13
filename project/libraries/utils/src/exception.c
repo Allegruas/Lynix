@@ -40,7 +40,7 @@ int appendExceptionChild(Exception* parent, Exception* child) {
 }
 
 
-static void renderException_(Exception* tb, const char* prefix, int level) {
+static void renderException_(Exception* tb, char* prefix, int level) {
     if (!tb) return;
     printf("%s¨q©¤> %s:%d:%d\n", prefix, tb->path, tb->line, tb->column < 0 ? 0 : tb->column);
     printf("%s©¦\n", prefix);

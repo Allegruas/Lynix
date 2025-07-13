@@ -11,5 +11,6 @@ int main() {
 	Scanner* scan = scanner(strtow(readFileAll("main.ly")), "main.ly");
 	scanTokens(scan);
 	renderTokens(scan);
+	freeScanner(scan);
 	return 0;
 }
