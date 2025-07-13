@@ -11,4 +11,5 @@ add_subdirectory("project/libraries/compiler")
 add_subdirectory("project/libraries/lyson")
 add_subdirectory("project/lynix")
 
+
 add_dependencies(Main UTILS Compiler)
