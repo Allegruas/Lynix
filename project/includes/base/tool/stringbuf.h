@@ -6,10 +6,11 @@
 #include "../../lynix.h"
 
 typedef struct stringbuf {
-    char* buffer;    // 字符串缓冲区
-    size_t length;   // 当前字符串长度（不含终止符）
-    size_t capacity; // 缓冲区总容量
+    char* buffer;   
+    size_t length;   
+    size_t capacity; 
 } stringbuf;
+
 
 /**
  * @brief 创建新的字符串缓冲区
