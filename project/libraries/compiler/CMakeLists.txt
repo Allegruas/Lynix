@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.8)
 
 project(Compiler)
 
-add_library(Compiler SHARED "src/tokenizer.c")
+add_library(Compiler SHARED "src/tokenizer.c" "src/parser.c")
 
 
 set_target_properties(Compiler PROPERTIES

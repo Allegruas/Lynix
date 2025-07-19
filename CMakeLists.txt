@@ -8,6 +8,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 add_subdirectory("project/libraries/utils")
 add_subdirectory("project/libraries/compiler")
+add_subdirectory("project/libraries/assembler")
 add_subdirectory("project/libraries/lyson")
 add_subdirectory("project/lynix")
 
