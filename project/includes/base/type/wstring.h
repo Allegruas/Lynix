@@ -19,7 +19,7 @@
 #endif
 
 
-LYNIX_API char wctoc(wchar_t);
+LYNIX_API char wctoc(wchar);
 LYNIX_API char* wcstos(wstring);
-LYNIX_API char* wctos(wchar_t);
+LYNIX_API char* wctos(wchar);
 #endif // !STRING_H

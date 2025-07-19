@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.8)
 
 project(Lyson)
 
-add_library(Lyson SHARED "src/lyson.c"  "src/parser.c")
+add_library(Lyson SHARED "src/lyson.c"  "src/parser.c" "src/builder.c")
 
 
 set_target_properties(Lyson PROPERTIES

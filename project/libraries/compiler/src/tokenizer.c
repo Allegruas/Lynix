@@ -1,4 +1,5 @@
 #include <compiler/tokenizer.h>
+
 #include <base/tool/stringbuf.h>
 #include <base/tool/file.h>
 #include <lyson/lyson.h>
@@ -22,15 +23,15 @@ Scanner* scanner(wstring source, char* path) {
 	};
 	this->tokens = (Tokens*)malloc(sizeof(Tokens));
 	notNull(this->tokens);
-	this->tokens->data = (Token*)malloc(sizeof(Token));
+	this->tokens->data = (Token*)malloc(sizeof(Token) * 8);  
 	this->tokens->count = 0;
-	this->tokens->capacity = 0;
+	this->tokens->capacity = 8;
 
 	this->error = (Errors*)malloc(sizeof(Errors));
 	notNull(this->error);
-	this->error->errors = (char**)malloc(sizeof(char));
+	this->error->errors = (char**)malloc(sizeof(char) * 8); 
 	this->error->count = 0;
-	this->error->capacity = 0;
+	this->error->capacity = 8; 
 	return this;
 }
 
@@ -84,10 +85,15 @@ static int appendToken(Scanner* this, Token createToken) {
 		this->tokens->data = data;
 		this->tokens->capacity = capacity;
 	}
+	if (createToken.value == NULL) {
+		createToken.value = strdup("");
+	}
+
 	this->tokens->data[this->tokens->count] = createToken;
 	this->tokens->count++;
 	return 1;
 }
+		
 
 static Token scanString(Scanner* this) {
 	notNull(this);
@@ -398,18 +404,15 @@ void freeScanner(Scanner* this) {
 	if (this->source) free(this->source);
 	if (this->path) free(this->path);
 	if (this->tokens) {
-		for (size_t i = 0; i < this->tokens->count; i++) {
-			free(this->tokens->data[i].value);
-		}
 		free(this->tokens->data);
 		free(this->tokens);
-	}
-	if (this->error) {
-		for (size_t i = 0; i < this->error->count; i++) {
-			free(this->error->errors[i]);
+		if (this->error) {
+			for (size_t i = 0; i < this->error->count; i++) {
+				free(this->error->errors[i]);
+			}
+			free(this->error->errors);
+			free(this->error);
 		}
-		free(this->error->errors);
-		free(this->error);
+		free(this);
 	}
-	free(this);
 }

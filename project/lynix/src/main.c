@@ -1,16 +1,17 @@
-#include <stdio.h>
-#include <lyson/lyson.h>
-#include <lyson/parser.h>
-#include <compiler/tokenizer.h>
-#include <base/exception.h>
+#include "lyson/parser.h"
+#include "lyson/builder.h"
 #include <base/tool/file.h>
-#include <base/tool/stringbuf.h>
+#include <base/type/string.h>
+#include <base/type/wstring.h>
+#include <stdio.h>
 #include <locale.h>
+#include <wchar.h>
+#include <compiler/tokenizer.h>
 
 int main() {
-	Scanner* scan = scanner(strtow(readFileAll("main.ly")), "main.ly");
-	scanTokens(scan);
-	renderTokens(scan);
-	freeScanner(scan);
-	return 0;
+    setlocale(LC_ALL, "");
+
+
+
+    return 0;
 }
